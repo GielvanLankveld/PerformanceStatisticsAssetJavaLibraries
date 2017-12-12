@@ -26,7 +26,7 @@ import java.util.Objects;
  * Open University of the Netherlands
  */
  class DistributionAssumptionChecker {
-    protected static boolean processNormalityAssumption(final Distribution distribution) {
+    protected static boolean processNormalityAssumption(final Distribution distribution) throws PerformanceStatisticsException {
         // This function evaluates the class fields to determine if the distribution is normal.
         // The basic result is that a distribution is normal but the assessment of
         // skewness and kurtosis my change this result.
