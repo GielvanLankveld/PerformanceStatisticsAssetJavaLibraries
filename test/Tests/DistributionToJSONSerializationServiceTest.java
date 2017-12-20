@@ -20,6 +20,7 @@ package Tests;
 
 import PerformanceStatisticsLibrary.Distribution;
 import PerformanceStatisticsLibrary.DistributionToJSONSerializationService;
+import PerformanceStatisticsLibrary.PerformanceStatisticsException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -64,7 +65,13 @@ public class DistributionToJSONSerializationServiceTest {
                             + ",\"helper2\":0.0"
                             + ",\"helper3\":0.0"
                             + ",\"normal\":false}";
-        String result = DistributionToJSONSerializationService.serialize(distribution);
+        String result = "";
+        try {
+            result = DistributionToJSONSerializationService.serialize(distribution);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(expResult, result);
     }
 
@@ -87,8 +94,13 @@ public class DistributionToJSONSerializationServiceTest {
                             + ",\"helper2\":0.0"
                             + ",\"helper3\":0.0"
                             + ",\"normal\":false}";
-        Distribution result = DistributionToJSONSerializationService.deserialize(JSONObject);
-        
+        Distribution result = new Distribution();
+        try {
+            result = DistributionToJSONSerializationService.deserialize(JSONObject);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(0D,result.mean,0.00001);
         assertEquals(0D,result.min,0.00001);
         assertEquals(0D,result.max,0.00001);

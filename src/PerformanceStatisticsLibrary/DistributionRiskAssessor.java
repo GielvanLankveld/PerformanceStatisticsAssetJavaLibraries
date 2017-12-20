@@ -49,13 +49,26 @@ public class DistributionRiskAssessor {
             2 = group 2 is larger than group 1 (significantly significant)
         */
         
-        //Do a t-test between the groups
-        double T = (group1.mean - group2.mean) / sqrt((group1.n)+(group2.n));
+        //Calculate the degrees of freedom, needed for lookup
+        int DF = Math.round((group1.n + group2.n) / 2);
         
-        if (T <= 0.05){
+        //Calculate common varance between the two groups
+        double CommonVariance = (group1.variance + group2.variance) / DF;
+                
+        //Do a t-test between the groups
+        double T = (group1.mean - group2.mean) / sqrt((CommonVariance / group1.n) + (CommonVariance / group2.n));
+        
+        //Lookup critical T value for Paired-samples T-test and compare the T-Test results
+        if (T <= StatResource.getCriticalTTablePairedTTestValue(DF)){
             return 0;
         } else {
-            return 1;
+            //Test value was greater than the critical value so the groups differ significantly
+            //Check if group 1 > group 2 or the other way around
+            if (group1.mean > group1.mean){
+                return 1;
+            } else {
+                return 2;
+            }
         }
     }
 }

@@ -27,7 +27,8 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Giel
+ * @author Giel van Lankveld
+ * Open University of the Netherlands
  */
 public class DistributionUpdaterTest {
     
