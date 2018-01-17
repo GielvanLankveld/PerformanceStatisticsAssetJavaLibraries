@@ -18,8 +18,7 @@
  */
 package PerformanceStatisticsLibrary;
 
-import PerformanceStatisticsLibrary.Distribution;
-import PerformanceStatisticsLibrary.DistributionUpdater;
+import static PerformanceStatisticsLibrary.DistributionUpdater.UpdateDistribution;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,9 +50,8 @@ public class DistributionUpdaterTest {
         System.out.println("updateDistribution");
         Distribution distribution = null;
         double newScore = 0.0;
-        DistributionUpdater instance = new DistributionUpdater();
         Distribution expResult = null;
-        Distribution result = instance.updateDistribution(distribution, newScore);
+        Distribution result = UpdateDistribution(distribution, newScore);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -24,7 +24,7 @@ package PerformanceStatisticsLibrary;
  * Open University of the Netherlands
  */
 public class DistributionUpdater {
-    public Distribution updateDistribution(Distribution distribution,double newScore) throws PerformanceStatisticsException {
+    public static Distribution UpdateDistribution(Distribution distribution,double newScore) throws PerformanceStatisticsException {
         
         //New N, code guarantees N of 1 or higher
         Long tmpNL = distribution.n;
