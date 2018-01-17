@@ -26,18 +26,22 @@ import static java.lang.Math.sqrt;
  * Open University of the Netherlands
  */
 public class DistributionRiskAssessor {
-    public static boolean StudentToGroupAssessment (double score, Distribution distribution) throws PerformanceStatisticsException {
+    public static boolean StudentToGroupAssessment (Double score, Distribution distribution) throws PerformanceStatisticsException {
         /*
             This function tests whether the student is at risk based on their distance from the group mean.
             The risk exists when a student is one or more standard deviations below the group mean.
         */
-        
-        if (score < (distribution.mean - distribution.standardDeviation)){
-            //The student is at risk
-            return true;
-        } else {
-            //The student is not at risk
-            return false;
+        if ((distribution == null) || (score == null)){
+            throw new PerformanceStatisticsException("One of the inputs was null");
+        }
+        else {
+            if (score < (distribution.mean - distribution.standardDeviation)){
+                //The student is at risk
+                return true;
+            } else {
+                //The student is not at risk
+                return false;
+            }
         }
     }
     
@@ -48,26 +52,30 @@ public class DistributionRiskAssessor {
             1 = group 1 is larger than group 2 (significantly significant)
             2 = group 2 is larger than group 1 (significantly significant)
         */
-        
-        //Calculate the degrees of freedom, needed for lookup
-        int DF = Math.round((group1.n + group2.n) / 2);
-        
-        //Calculate common varance between the two groups
-        double CommonVariance = (group1.variance + group2.variance) / DF;
-                
-        //Do a t-test between the groups
-        double T = (group1.mean - group2.mean) / sqrt((CommonVariance / group1.n) + (CommonVariance / group2.n));
-        
-        //Lookup critical T value for Paired-samples T-test and compare the T-Test results
-        if (T <= StatResource.getCriticalTTablePairedTTestValue(DF)){
-            return 0;
-        } else {
-            //Test value was greater than the critical value so the groups differ significantly
-            //Check if group 1 > group 2 or the other way around
-            if (group1.mean > group1.mean){
-                return 1;
+        if ((group1 == null) || (group2 == null)){
+            throw new PerformanceStatisticsException("One of the inputs was null");
+        }
+        else {
+            //Calculate the degrees of freedom, needed for lookup
+            int DF = Math.round((group1.n + group2.n) / 2);
+
+            //Calculate common varance between the two groups
+            double CommonVariance = (group1.variance + group2.variance) / DF;
+
+            //Do a t-test between the groups
+            double T = (group1.mean - group2.mean) / sqrt((CommonVariance / group1.n) + (CommonVariance / group2.n));
+
+            //Lookup critical T value for Paired-samples T-test and compare the T-Test results
+            if (T <= StatResource.getCriticalTTablePairedTTestValue(DF)){
+                return 0;
             } else {
-                return 2;
+                //Test value was greater than the critical value so the groups differ significantly
+                //Check if group 1 > group 2 or the other way around
+                if (group1.mean > group1.mean){
+                    return 1;
+                } else {
+                    return 2;
+                }
             }
         }
     }

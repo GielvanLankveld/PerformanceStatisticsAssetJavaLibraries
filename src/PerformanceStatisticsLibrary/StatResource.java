@@ -134,16 +134,21 @@ public class StatResource {
             1.96};
     }
     
-    public static Double getCriticalTTablePairedTTestValue(int DF) {
-        if (DF == 0) {
-            //There is no value for 0 degrees of freedom
-            return null;
-        } else if (DF > 101) {
-            //The critical t value remains constant between 101 and infinity so return 101
-            return CriticalTTablePairedTTest[101];
-        } else {
-            //Return the listed value
-            return CriticalTTablePairedTTest[DF];
+    public static Double getCriticalTTablePairedTTestValue(Integer DF) throws PerformanceStatisticsException {
+        if (DF == null){
+            throw new PerformanceStatisticsException("The input was null");
+        }
+        else {
+            if (DF == 0) {
+                //There is no value for 0 degrees of freedom
+                return null;
+            } else if (DF > 101) {
+                //The critical t value remains constant between 101 and infinity so return 101
+                return CriticalTTablePairedTTest[101];
+            } else {
+                //Return the listed value
+                return CriticalTTablePairedTTest[DF];
+            }
         }
     }
 }
