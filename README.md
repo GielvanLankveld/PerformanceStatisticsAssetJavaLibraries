@@ -45,4 +45,17 @@ If you need to serialize the Distribution instances you can supply DistributionT
 
 ## Code examples
 Some code examples can be found inside the library unit tests. An example is provided here as well. In this example we are using the performance statistics asset in a web service pipeline. The distribution is updated with each new data point and the resulting risk assessment is committed to a database. It assumes no distributions were previously in the database. 
-The code example can be plugged into the point where the web service is called.
+The code example can be plugged into the point where the web service handles the request.
+
+```
+//Create and update a distribution
+Distribution distribution = new Distribution();
+DistributionUpdater updater = new DistributionUpdater();
+Distribution distribution = updater.updateDistribution(distribution, newScore);
+
+//Commit distribution to database
+Database.add(DistributionToJSONSerializationService.serialize(distribution));
+
+//Commit risk assessment to database
+Database.add(DistributionRiskAssessor.serialize(distribution));
+```
