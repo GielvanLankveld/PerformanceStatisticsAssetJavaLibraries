@@ -52,12 +52,20 @@ The code example can be plugged into the point where the web service handles the
 ```
 //Create and update a distribution
 Distribution distribution = new Distribution();
-DistributionUpdater updater = new DistributionUpdater();
-Distribution distribution = updater.updateDistribution(distribution, newScore);
 
-//Commit distribution to database
-Database.add(DistributionToJSONSerializationService.serialize(distribution));
+try {
+  //Enter example scores into the distribution
+  distribution = DistributionUpdater.UpdateDistribution(distribution, 1.0);
+  distribution = DistributionUpdater.UpdateDistribution(distribution, 2.0);
+  distribution = DistributionUpdater.UpdateDistribution(distribution, 3.0);
 
-//Commit risk assessment to database
-Database.add(DistributionRiskAssessor.serialize(distribution));
+  //Output the distribution
+  System.out.println(DistributionToJSONSerializationService.Serialize(distribution));
+
+  //Output the risk assessment
+  System.out.println("Student at risk = " + DistributionRiskAssessor.StudentToGroupAssessment(8.0, distribution));
+}
+catch (PerformanceStatisticsException e) {
+  System.out.println(e);
+}
 ```
