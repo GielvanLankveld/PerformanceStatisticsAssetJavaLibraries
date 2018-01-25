@@ -27,7 +27,7 @@ import java.util.*;
  * Open University of the Netherlands
  */
 public class DistributionToJSONSerializationService {
-    public static String serialize (Distribution distribution) throws PerformanceStatisticsException {
+    public static String Serialize (Distribution distribution) throws PerformanceStatisticsException {
         //This method provides a simple JSON serializer
         //This serializer does not support JSON array structures (to be added in the future)
         
@@ -59,7 +59,7 @@ public class DistributionToJSONSerializationService {
         return JSONObject;
     }
     
-    public static Distribution deserialize (String JSONObject) throws PerformanceStatisticsException {
+    public static Distribution Deserialize (String JSONObject) throws PerformanceStatisticsException {
         //This method provides a simple JSON deserializer
         //This deserializer does not support JSON array structures (to be added in the future)
         

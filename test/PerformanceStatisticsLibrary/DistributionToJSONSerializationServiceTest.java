@@ -64,7 +64,7 @@ public class DistributionToJSONSerializationServiceTest {
                             + ",\"normal\":false}";
         String result = "";
         try {
-            result = DistributionToJSONSerializationService.serialize(distribution);
+            result = DistributionToJSONSerializationService.Serialize(distribution);
         }
         catch (PerformanceStatisticsException e) {
             System.out.println(e.getMessage());
@@ -93,7 +93,7 @@ public class DistributionToJSONSerializationServiceTest {
                             + ",\"normal\":false}";
         Distribution result = new Distribution();
         try {
-            result = DistributionToJSONSerializationService.deserialize(JSONObject);
+            result = DistributionToJSONSerializationService.Deserialize(JSONObject);
         }
         catch (PerformanceStatisticsException e) {
             System.out.println(e.getMessage());
