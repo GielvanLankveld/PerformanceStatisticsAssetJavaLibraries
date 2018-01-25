@@ -27,7 +27,7 @@ package PerformanceStatisticsLibrary;
     protected static boolean processNormalityAssumption(final Distribution distribution) throws PerformanceStatisticsException {
         // This function evaluates the class fields to determine if the distribution is normal.
         // The basic result is that a distribution is normal but the assessment of
-        // skewness and kurtosis my change this result.
+        // skewness and kurtosis may change this result.
         // Checks for normality are based on Chapter 5 of: Field (2009) Discovering statistics
         // using SPSS. Pp 136-139. ISBN: 978-1-84787-906-6, ISBN: 978-1-84787-907-3.
         // A strict interpretation of these checks is used (tresholds of 1.96 and 2.58).
@@ -62,6 +62,15 @@ package PerformanceStatisticsLibrary;
                         normal = false;
                 } else {
                     if ((zSkew >= LARGE_SAMPLE_THRESHOLD)&&(zSkew <= -LARGE_SAMPLE_THRESHOLD))
+                        normal = false;
+                }
+                
+                // Assumption checks are based on the size of n (see explanation above)
+                if (n < SMALL_SAMPLE_MAX) {
+                    if ((zKurt >= SMALL_SAMPLE_THRESHOLD)&&(zKurt <= -SMALL_SAMPLE_THRESHOLD))
+                        normal = false;
+                } else {
+                    if ((zKurt >= LARGE_SAMPLE_THRESHOLD)&&(zKurt <= -LARGE_SAMPLE_THRESHOLD))
                         normal = false;
                 }
             } else {

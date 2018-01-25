@@ -18,8 +18,6 @@
  */
 package PerformanceStatisticsLibrary;
 
-import PerformanceStatisticsLibrary.Distribution;
-import PerformanceStatisticsLibrary.DistributionRiskAssessor;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,10 +50,14 @@ public class DistributionRiskAssessorTest {
         double score = 0.0;
         Distribution distribution = null;
         boolean expResult = false;
-        boolean result = DistributionRiskAssessor.StudentToGroupAssessment(score, distribution);
+        boolean result = true; 
+        try {
+            result = DistributionRiskAssessor.StudentToGroupAssessment(score, distribution);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -67,10 +69,14 @@ public class DistributionRiskAssessorTest {
         Distribution group1 = null;
         Distribution group2 = null;
         int expResult = 0;
-        int result = DistributionRiskAssessor.GroupComparison(group1, group2);
+        int result = 1; 
+        try {
+            result = DistributionRiskAssessor.GroupComparison(group1, group2);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

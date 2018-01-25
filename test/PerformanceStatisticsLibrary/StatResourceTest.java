@@ -27,9 +27,9 @@ import static org.junit.Assert.*;
  *
  * @author Giel
  */
-public class PerformanceStatisticsExceptionTest {
+public class StatResourceTest {
     
-    public PerformanceStatisticsExceptionTest() {
+    public StatResourceTest() {
     }
     
     @BeforeClass
@@ -40,10 +40,22 @@ public class PerformanceStatisticsExceptionTest {
     public static void tearDownClass() {
     }
 
+    /**
+     * Test of getCriticalTTablePairedTTestValue method, of class StatResource.
+     */
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetCriticalTTablePairedTTestValue() throws Exception {
+        System.out.println("getCriticalTTablePairedTTestValue");
+        Integer DF = null;
+        Double expResult = null;
+        Double result = -1.0;
+        try {
+            result = StatResource.getCriticalTTablePairedTTestValue(DF);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
+        assertEquals(expResult, result);
     }
     
 }

@@ -49,12 +49,17 @@ public class DistributionUpdaterTest {
     public void testUpdateDistribution() throws Exception {
         System.out.println("updateDistribution");
         Distribution distribution = null;
+        Distribution result = new Distribution();
         double newScore = 0.0;
         Distribution expResult = null;
-        Distribution result = UpdateDistribution(distribution, newScore);
+        try {
+            result = UpdateDistribution(distribution, newScore);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
+         
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

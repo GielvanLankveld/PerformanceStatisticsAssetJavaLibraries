@@ -18,8 +18,6 @@
  */
 package PerformanceStatisticsLibrary;
 
-import PerformanceStatisticsLibrary.Distribution;
-import PerformanceStatisticsLibrary.DistributionAssumptionChecker;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,14 +44,17 @@ public class DistributionAssumptionCheckerTest {
      * Test of processNormalityAssumption method, of class DistributionAssumptionChecker.
      */
     @Test
-    public void testProcessNormalityAssumption() throws Exception {
+    public void testProcessNormalityAssumption(){
         System.out.println("processNormalityAssumption");
         Distribution distribution = null;
         boolean expResult = false;
-        boolean result = DistributionAssumptionChecker.processNormalityAssumption(distribution);
+        boolean result = true;
+        try {
+            result = DistributionAssumptionChecker.processNormalityAssumption(distribution);
+        }
+        catch (PerformanceStatisticsException e) {
+            System.out.println(e.getMessage());
+        }
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-    
 }
